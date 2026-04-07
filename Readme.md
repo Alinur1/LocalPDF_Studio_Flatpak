@@ -3,4 +3,4 @@ Instructions on how to create a flatpak version of LocalPDF Studio. This repo co
 - .metainfo.xml file
 - .yml file
 - icon of the app
-- a doc file inside "Flatpak builder doc" folder on how to create and the flatpak on your device
+- a doc file inside "Flatpak builder doc" folder on how to create, install, uninstall and run the flatpak on your device
