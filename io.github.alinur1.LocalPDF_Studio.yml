@@ -12,14 +12,12 @@ finish-args:
   - --share=ipc
   - --socket=fallback-x11
   - --socket=wayland
-  - --filesystem=xdg-documents
-  - --filesystem=xdg-download
-  - --filesystem=xdg-desktop
-  - --filesystem=/media
-  - --filesystem=/run/media
-  - --filesystem=/mnt
-  - --share=network
+  - --filesystem=xdg-documents:rw
+  - --filesystem=xdg-download:rw
+  - --filesystem=xdg-desktop:rw
+  - --filesystem=xdg-pictures:rw
   - --device=dri
+  - --share=network
 
 modules:
   - name: ghostscript
@@ -55,7 +53,7 @@ modules:
           /app/localpdf-studio/resources/assets/backend_linux/compiled-ghostscript/share/
       - install -Dm644 io.github.alinur1.LocalPDF_Studio.desktop
             /app/share/applications/io.github.alinur1.LocalPDF_Studio.desktop
-      - install -Dm644 app_icon_linux.png
+      - install -Dm644 io.github.alinur1.LocalPDF_Studio.png
             /app/share/icons/hicolor/512x512/apps/io.github.alinur1.LocalPDF_Studio.png
       - install -Dm644 io.github.alinur1.LocalPDF_Studio.metainfo.xml
             /app/share/metainfo/io.github.alinur1.LocalPDF_Studio.metainfo.xml
@@ -74,8 +72,8 @@ modules:
         path: io.github.alinur1.LocalPDF_Studio.metainfo.xml
 
       - type: file
-        path: app_icon_linux.png
-        dest-filename: app_icon_linux.png
+        path: io.github.alinur1.LocalPDF_Studio.png
+        dest-filename: io.github.alinur1.LocalPDF_Studio.png
 
       - type: script
         dest-filename: run.sh
