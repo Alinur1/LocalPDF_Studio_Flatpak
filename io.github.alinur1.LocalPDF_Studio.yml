@@ -12,11 +12,11 @@ finish-args:
   - --share=ipc
   - --socket=fallback-x11
   - --socket=wayland
-  - --filesystem=xdg-documents:rw
-  - --filesystem=xdg-download:rw
-  - --filesystem=xdg-desktop:rw
-  - --filesystem=xdg-pictures:rw
-  # - --filesystem=host
+  # - --filesystem=xdg-documents:rw
+  # - --filesystem=xdg-download:rw
+  # - --filesystem=xdg-desktop:rw
+  # - --filesystem=xdg-pictures:rw
+  - --filesystem=host
   - --device=dri
   - --share=network
 
