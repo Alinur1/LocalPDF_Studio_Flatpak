@@ -16,6 +16,7 @@ finish-args:
   - --filesystem=xdg-download:rw
   - --filesystem=xdg-desktop:rw
   - --filesystem=xdg-pictures:rw
+  # - --filesystem=host
   - --device=dri
   - --share=network
 
