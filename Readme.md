@@ -19,34 +19,58 @@ flatpak install flathub org.freedesktop.Platform//25.08 org.freedesktop.Sdk//25.
 flatpak install flathub org.electronjs.Electron2.BaseApp//25.08
 ```
 
-## 3. Build and install locally
+## 3. Generate "generated-sources.json" file using python (don't forget to use virtual environment)
+```bash
+python3 -m venv flatpak-tools-env
+```
+```bash
+source flatpak-tools-env/bin/activate
+```
+Note: v3.0.0 is a release tag of LocaLPDF Studio. Change the tag when a new version releases. Check here for new release and it's tag number: https://github.com/Alinur1/LocalPDF_Studio/releases 
+```bash
+wget https://raw.githubusercontent.com/Alinur1/LocalPDF_Studio/refs/tags/v3.0.0/package-lock.json
+```
+```bash
+pip install git+https://github.com/flatpak/flatpak-builder-tools.git#subdirectory=node
+```
+```bash
+flatpak-node-generator npm package-lock.json -o generated-sources.json
+```
+```bash
+rm package-lock.json
+```
+```bash
+deactivate
+```
+
+## 4. Build and install locally
 ```bash
 flatpak-builder --user --install --force-clean build-dir \
   io.github.alinur1.LocalPDF_Studio.yml
 ```
 
-## 4. Run it
+## 5. Run it
 ```bash
 flatpak run io.github.alinur1.LocalPDF_Studio
 ```
 
-## 5. To remove/uninstall it
+## 6. To remove/uninstall it
 ```bash
 flatpak remove io.github.alinur1.LocalPDF_Studio
 ```
 
 # Linter: (not necessary actually)
-## 6. First install the builder
+## 7. First install the builder
 ```bash
 flatpak install flathub org.flatpak.Builder
 ```
 
-## 7. Run linter for the metainfo file
+## 8. Run linter for the metainfo file
 ```bash
 flatpak run --command=flatpak-builder-lint org.flatpak.Builder appstream io.github.alinur1.LocalPDF_Studio.metainfo.xml
 ```
 
-## 8. Run linter for the manifest file
+## 9. Run linter for the manifest file
 ```bash
 flatpak run --command=flatpak-builder-lint org.flatpak.Builder manifest io.github.alinur1.LocalPDF_Studio.yml
 ```

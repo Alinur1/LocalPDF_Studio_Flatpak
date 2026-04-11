@@ -591,3 +591,4 @@ FodyWeavers.xsd
 /.flatpak-builder
 *.traineddata
 *.gz
+/flatpak-tools-env
