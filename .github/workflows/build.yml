@@ -1,0 +1,84 @@
+name: Build and Publish Flatpak
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # allows manual trigger
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-25.08
+      options: --privileged
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Flatpak
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          bundle: io.github.alinur1.LocalPDF_Studio.flatpak
+          manifest-path: io.github.alinur1.LocalPDF_Studio.yml
+          cache-key: flatpak-builder-${{ github.sha }}
+          repository-name: localpdfstudio
+          repository-url: https://alinur1.github.io/LocalPDF_Studio_Flatpak/repo
+
+      - name: Upload flatpak bundle as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LocalPDF-Studio-Flatpak
+          path: io.github.alinur1.LocalPDF_Studio.flatpak
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: source
+
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+          fetch-depth: 0
+
+      - name: Download built flatpak
+        uses: actions/download-artifact@v4
+        with:
+          name: LocalPDF-Studio-Flatpak
+
+      - name: Install flatpak
+        run: sudo apt-get install -y flatpak
+
+      - name: Add to repo
+        run: |
+          mkdir -p gh-pages/repo
+          flatpak build-import-bundle gh-pages/repo io.github.alinur1.LocalPDF_Studio.flatpak
+          flatpak build-update-repo gh-pages/repo --generate-static-deltas
+
+      - name: Copy repo files
+        run: |
+          cp source/localpdfstudio.flatpakrepo gh-pages/
+          cp source/localpdfstudio.flatpakref gh-pages/
+          cp source/io.github.alinur1.LocalPDF_Studio.png gh-pages/
+
+      - name: Push to gh-pages
+        run: |
+          cd gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Update Flatpak repo" || echo "Nothing to commit"
+          git push

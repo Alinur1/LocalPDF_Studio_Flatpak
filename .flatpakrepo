@@ -1,0 +1,6 @@
+[Flatpak Repo]
+Title=LocalPDF Studio
+Url=https://alinur1.github.io/LocalPDF_Studio_Flatpak/repo
+Homepage=https://alinur1.github.io/LocalPDF_Studio_Website/
+Description=Offline, open-source, privacy-first PDF toolkit
+Icon=https://raw.githubusercontent.com/Alinur1/LocalPDF_Studio_Flatpak/main/io.github.alinur1.LocalPDF_Studio.png
