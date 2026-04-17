@@ -25,6 +25,7 @@ jobs:
           cache-key: flatpak-builder-${{ github.sha }}
           repository-name: localpdfstudio
           repository-url: https://alinur1.github.io/LocalPDF_Studio_Flatpak/repo
+          install-deps-from: flathub
 
       - name: Upload flatpak bundle as artifact
         uses: actions/upload-artifact@v4
