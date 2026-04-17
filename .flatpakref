@@ -1,9 +1,0 @@
-[Flatpak Ref]
-Title=LocalPDF Studio
-Name=io.github.alinur1.LocalPDF_Studio
-Branch=stable
-Url=https://alinur1.github.io/LocalPDF_Studio_Flatpak/repo
-IsRuntime=false
-Homepage=https://alinur1.github.io/LocalPDF_Studio_Website/
-GPGKey= 
-RuntimeRepo=https://flathub.org/repo/flathub.flatpakrepo
