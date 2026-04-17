@@ -5,3 +5,5 @@ Branch=stable
 Url=https://alinur1.github.io/LocalPDF_Studio_Flatpak/repo
 IsRuntime=false
 Homepage=https://alinur1.github.io/LocalPDF_Studio_Website/
+GPGKey= 
+RuntimeRepo=https://flathub.org/repo/flathub.flatpakrepo

@@ -16,6 +16,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
+      - name: Add Flathub remote
+        run: |
+          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepos
 
       - name: Build Flatpak
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6
@@ -23,9 +27,9 @@ jobs:
           bundle: io.github.alinur1.LocalPDF_Studio.flatpak
           manifest-path: io.github.alinur1.LocalPDF_Studio.yml
           cache-key: flatpak-builder-${{ github.sha }}
+          arch: x86_64
           repository-name: localpdfstudio
           repository-url: https://alinur1.github.io/LocalPDF_Studio_Flatpak/repo
-          install-deps-from: flathub
 
       - name: Upload flatpak bundle as artifact
         uses: actions/upload-artifact@v4
